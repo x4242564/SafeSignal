@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>SafeSignal Chat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <svg width="34" height="18" viewBox="0 0 34 18" aria-hidden="true">
+        <rect x="0.75" y="0.75" width="32.5" height="16.5" rx="8.25" fill="none" stroke="currentColor" stroke-opacity=".3" stroke-width="1.5"/>
+        <circle cx="9" cy="9" r="4" style="fill:var(--clear)"/>
+        <circle cx="17" cy="9" r="4" style="fill:var(--caution)"/>
+        <circle cx="25" cy="9" r="4" style="fill:var(--stop)"/>
+      </svg>
+      <h1>SafeSignal Chat</h1>
+    </div>
+    <nav class="views" aria-label="Choose a view">
+      <button type="button" data-action="view" data-view="sender" aria-pressed="true">Sender</button>
+      <button type="button" data-action="view" data-view="recipient" aria-pressed="false">Recipient</button>
+      <button type="button" data-action="view" data-view="moderator" aria-pressed="false">Moderator <span class="badge" id="mod-badge" hidden>0</span></button>
+    </nav>
+  </header>
+
+  <main class="layout">
+    <section class="panel chat" aria-labelledby="chat-title">
+      <div class="chat-head">
+        <div class="avatar" id="avatar" aria-hidden="true">Y</div>
+        <div class="chat-title"><h2 id="chat-title">You</h2><p id="chat-sub"></p></div>
+        <button type="button" class="btn" data-action="swap" id="swap">View as recipient</button>
+      </div>
+      <p class="banner" id="banner" role="alert" hidden></p>
+      <div class="thread" id="thread"></div>
+      <div class="composer" id="composer">
+        <div class="presets" id="presets" role="group" aria-label="Test messages"></div>
+        <div class="compose-row">
+          <label class="sr-only" for="compose">Message to yourself</label>
+          <textarea id="compose" rows="1" maxlength="1000" placeholder="Write a message to yourself"></textarea>
+          <button type="button" class="btn btn-primary send" id="send" data-action="send" disabled>Send</button>
+        </div>
+        <div class="compose-foot">
+          <span>Each message is screened before delivery. Your first send asks to use your Claude account.</span>
+          <span class="foot-controls">
+            <label>Analysis
+              <select id="tier">
+                <option value="quick">Fast</option>
+                <option value="default">Balanced</option>
+                <option value="complex">Thorough</option>
+              </select>
+            </label>
+            <button type="button" class="btn-quiet" data-action="clear" id="clear">Clear conversation</button>
+          </span>
+        </div>
+      </div>
+      <div class="recip-foot" id="recip-foot" hidden>
+        <span>Only messages that pass screening reach this inbox.</span>
+        <button type="button" class="btn" data-action="view" data-view="sender">Write as sender</button>
+      </div>
+    </section>
+
+    <aside class="panel inspector" id="inspector" aria-label="Screening report">
+      <div class="insp" id="insp"></div>
+    </aside>
+  </main>
+  <p class="sr-only" role="status" id="announce"></p>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

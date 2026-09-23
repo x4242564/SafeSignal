@@ -1,0 +1,12 @@
+# Local runtime files
+.DS_Store
+*.log
+
+# Secrets
+.env
+
+# Dependencies
+node_modules/
+
+# Editor metadata
+.vscode/
